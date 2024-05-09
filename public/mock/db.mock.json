@@ -1,0 +1,166 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "name": "Producto 1",
+      "description": "Descripción del producto 1",
+      "price": 10.99,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_749183-MLA54967257394_042023-O.webp",
+      "category": "Electrónica",
+      "stock": 20
+    },
+    {
+      "id": 2,
+      "name": "Remeras Talles Especiales Lisas 3xl 4xl 5xl 6xl 7xl 8xl",
+      "description": "Descripcion 2",
+      "image": "https://http2.mlstatic.com/D_NQ_NP_760847-MLA74217675247_012024-O.webp",
+      "price": 29.99,
+      "category": "Libros",
+      "stock": 15
+    },
+    {
+      "id": 3,
+      "name": "Producto 3",
+      "description": "Descripción del producto 3",
+      "price": 49.99,
+      "category": "Electrónica",
+      "stock": 30
+    },
+    {
+      "id": 4,
+      "name": "Producto 4",
+      "description": "Descripción del producto 4",
+      "price": 5.99,
+      "category": "Alimentos",
+      "stock": 50
+    },
+    {
+      "id": 5,
+      "name": "Producto 5",
+      "description": "Descripción del producto 5",
+      "price": 99.99,
+      "category": "Electrodomésticos",
+      "stock": 10
+    },
+    {
+      "id": 6,
+      "name": "Producto 6",
+      "description": "Descripción del producto 6",
+      "price": 3.99,
+      "category": "Alimentos",
+      "stock": 40
+    },
+    {
+      "id": 7,
+      "name": "Producto 7",
+      "description": "Descripción del producto 7",
+      "price": 299.99,
+      "category": "Electrónica",
+      "stock": 25
+    },
+    {
+      "id": 8,
+      "name": "Producto 8",
+      "description": "Descripción del producto 8",
+      "price": 15.99,
+      "category": "Ropa",
+      "stock": 30
+    },
+    {
+      "id": 9,
+      "name": "Producto 9",
+      "description": "Descripción del producto 9",
+      "price": 45.99,
+      "category": "Libros",
+      "stock": 18
+    },
+    {
+      "id": 10,
+      "name": "Producto 10",
+      "description": "Descripción del producto 10",
+      "price": 8.99,
+      "category": "Alimentos",
+      "stock": 55
+    },
+    {
+      "id": 11,
+      "name": "Producto 11",
+      "description": "Descripción del producto 11",
+      "price": 12.99,
+      "category": "Jardinería",
+      "stock": 20
+    },
+    {
+      "id": 12,
+      "name": "Producto 12",
+      "description": "Descripción del producto 12",
+      "price": 22.99,
+      "category": "Herramientas",
+      "stock": 15
+    },
+    {
+      "id": 13,
+      "name": "Producto 13",
+      "description": "Descripción del producto 13",
+      "price": 130.99,
+      "category": "Electrónica",
+      "stock": 10
+    },
+    {
+      "id": 14,
+      "name": "Producto 14",
+      "description": "Descripción del producto 14",
+      "price": 110.99,
+      "category": "Electrodomésticos",
+      "stock": 12
+    },
+    {
+      "id": 15,
+      "name": "Producto 15",
+      "description": "Descripción del producto 15",
+      "price": 210.99,
+      "category": "Electrónica",
+      "stock": 17
+    },
+    {
+      "id": 16,
+      "name": "Producto 16",
+      "description": "Descripción del producto 16",
+      "price": 33.99,
+      "category": "Libros",
+      "stock": 22
+    },
+    {
+      "id": 17,
+      "name": "Producto 17",
+      "description": "Descripción del producto 17",
+      "price": 17.99,
+      "category": "Ropa",
+      "stock": 28
+    },
+    {
+      "id": 18,
+      "name": "Producto 18",
+      "description": "Descripción del producto 18",
+      "price": 24.99,
+      "category": "Herramientas",
+      "stock": 35
+    },
+    {
+      "id": 19,
+      "name": "Producto 19",
+      "description": "Descripción del producto 19",
+      "price": 2.99,
+      "category": "Alimentos",
+      "stock": 60
+    },
+    {
+      "id": 20,
+      "name": "Producto 20",
+      "description": "Descripción del producto 20",
+      "price": 300.99,
+      "category": "Electrodomésticos",
+      "stock": 8
+    }
+  ]
+}
