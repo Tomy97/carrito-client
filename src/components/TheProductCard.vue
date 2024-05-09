@@ -25,9 +25,7 @@ const $emit = defineEmits(['deleteProduct', 'addToCart'])
     </template>
     <template #content>
       <div class="text-right">
-        <span >
-          ${{ product.price }}
-        </span>
+        <span> ${{ product.price }} </span>
       </div>
     </template>
     <template #footer>
@@ -51,5 +49,7 @@ const $emit = defineEmits(['deleteProduct', 'addToCart'])
   min-height: 550px;
   height: 550px;
   object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 </style>

@@ -10,4 +10,6 @@ export type Product = {
   category: string
   stock: number
   image: string
+  disabledSum?: boolean
+  disabledMinus?: boolean
 }
