@@ -1,7 +1,3 @@
-export type ProductResponse = {
-  productos: Product[]
-}
-
 export type Product = {
   id: number
   name: string
@@ -9,7 +5,7 @@ export type Product = {
   price: number
   category: string
   stock: number
-  image: string
+  imageFilename: string
   disabledSum?: boolean
   disabledMinus?: boolean
 }

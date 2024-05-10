@@ -13,7 +13,7 @@ const $emit = defineEmits(['deleteProduct', 'addToCart'])
 <template>
   <Card class="h-full">
     <template #header>
-      <img :alt="product.name" :src="product.image" class="card-img" />
+      <img :alt="product.name" :src="product.imageFilename" class="card-img" />
     </template>
     <template #title>
       {{ product.name }}
@@ -35,7 +35,7 @@ const $emit = defineEmits(['deleteProduct', 'addToCart'])
           severity="danger"
           outlined
           class="w-full mb-2"
-          v-if="true"
+          v-if="hasPermission"
           @click="$emit('deleteProduct', product.id)"
         />
         <Button label="Agregar al carrito" class="w-full" @click="$emit('addToCart', product)" />

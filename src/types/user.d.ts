@@ -2,6 +2,6 @@ export type User = {
   id: number
   name: string
   email: string
-  amount: number
+  balance: number
   role: 'user' | 'admin'
 }

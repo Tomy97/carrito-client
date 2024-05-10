@@ -24,10 +24,10 @@ const $emit = defineEmits(['deleteProduct', 'sumQuantity', 'minusQuantity'])
   <Card>
     <template #content>
       <DataTable :value="props.cart">
-        <Column field="image" header="">
-          <template #body="data">
+        <Column field="imageFilename" header="">
+          <template #body="{ data }">
             <div class="text-center">
-              <img :src="data.data.image" alt="Producto" style="width: 50px" />
+              <img :src="data.imageFilename" alt="Producto" style="width: 50px" />
             </div>
           </template>
         </Column>
