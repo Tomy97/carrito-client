@@ -6,7 +6,7 @@
     "src/**/*.vue",
     "src/**/*.ts",
     "src/store/*.ts",
-    "src/composables/*.ts",
+    "src/composable/*.ts",
     "src/components/*.vue",
     "src/shared/*.vue"
   ],

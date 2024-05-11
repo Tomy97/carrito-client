@@ -4,4 +4,5 @@ export type User = {
   email: string
   balance: number
   role: 'user' | 'admin'
+  cartId: number
 }

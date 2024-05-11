@@ -3,12 +3,21 @@ import { ref } from 'vue'
 import Menubar from 'primevue/menubar'
 import Badge from 'primevue/badge'
 import Avatar from 'primevue/avatar'
-import { RouterLink } from 'vue-router';
-import { computed } from 'vue';
+import { RouterLink, useRouter } from 'vue-router'
+import { computed } from 'vue'
 import { UseCartStore } from '../store/cart.store'
-const badge = ref<number>(0)
+import { useAuthStore } from '@/store/auth.store'
+import Button from 'primevue/button'
+
 const store = UseCartStore()
+const authStore = useAuthStore()
+
+const router = useRouter()
 const incrementBadge = computed(() => store.cart?.length ?? 0)
+
+const onHandleRedirectToLogin = () => {
+  router.push({ name: 'Login' })
+}
 
 </script>
 <template>
@@ -16,9 +25,7 @@ const incrementBadge = computed(() => store.cart?.length ?? 0)
     <Menubar>
       <template #start>
         <RouterLink :to="{ name: 'Home' }" class="no-underline text-700">
-          <h3>
-            Carrito Shop
-          </h3>
+          <h3>Carrito Shop</h3>
         </RouterLink>
       </template>
       <template #end>
@@ -29,10 +36,14 @@ const incrementBadge = computed(() => store.cart?.length ?? 0)
               <Badge :value="incrementBadge" />
             </template>
           </RouterLink>
-          <Avatar
-            image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
-            shape="circle"
-          />
+
+          <template v-if="authStore.isUserLogged"> Te logueaste correctamente </template>
+          <template v-else>
+            <Button @click="onHandleRedirectToLogin">
+              <i class="pi pi-sign-in mr-2" />
+              <span>Login</span>
+            </Button>
+          </template>
         </div>
       </template>
     </Menubar>
