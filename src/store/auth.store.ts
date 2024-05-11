@@ -7,9 +7,15 @@ export const useAuthStore = defineStore(
   () => {
     const isUserLogged = ref(false)
     const user = ref<User | null>(null)
+
+    const logout = () => {
+      isUserLogged.value = false
+      user.value = null
+    }
     return {
       isUserLogged,
-      user
+      user,
+      logout
     }
   },
   {

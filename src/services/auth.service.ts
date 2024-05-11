@@ -1,4 +1,4 @@
-import type { User } from '@/types/user'
+import type { User, UserResponse } from '@/types/user'
 import axios from 'axios'
 
 interface FormRegisterParams {
@@ -13,9 +13,9 @@ interface FormLoginParams {
 }
 
 export const loginService = async (form: FormLoginParams): Promise<User> => {
-  const { data } = await axios.post<User>(import.meta.env.VITE_API_URL + '/login', form)
+  const { data } = await axios.post<UserResponse>(import.meta.env.VITE_API_URL + '/login', form)
 
-  return data
+  return data.user
 }
 
 export const registerService = async (form: FormRegisterParams): Promise<User> => {

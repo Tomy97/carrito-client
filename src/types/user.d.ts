@@ -1,3 +1,9 @@
+export type UserResponse = {
+  success: boolean
+  user: User
+  message: string
+}
+
 export type User = {
   id: number
   name: string
