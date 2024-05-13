@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import Card from 'primevue/card'
-import Button from 'primevue/button'
-
 import { UseCartStore } from '@/store/cart.store'
 
 import TheDataTableProductCard from '@/components/TheDataTableProductCard.vue'
 import ThePurcheseSummaryCard from '@/components/ThePurcheseSummaryCard.vue'
+import { onMounted } from 'vue'
 
 const store = UseCartStore()
+
+onMounted(async () => {
+  console.log('se monto el componente')
+  
+  await store.handleGetUserLoggedCart()
+})
+
 </script>
 <template>
   <div class="cart-container">

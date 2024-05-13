@@ -52,6 +52,10 @@ const handleChangeDialogVal = () => {
             <template v-if="isOpenDialog">
               <TheDialogUserLogued
                 :visible="isOpenDialog"
+                :userData="{
+                  name: authStore.user?.name ?? '',
+                  balance: authStore.user?.balance ?? 0
+                }"
                 @closeDialog="handleChangeDialogVal"
                 @handleLogout="authStore.logout"
               />

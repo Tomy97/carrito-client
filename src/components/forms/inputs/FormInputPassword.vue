@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { defineRule } from 'vee-validate'
+import { defineRule, useField } from 'vee-validate'
 import { required, min, confirmed } from '@vee-validate/rules'
-
-import useInputField from '../../../composable/useInputField'
 
 import Password from 'primevue/password'
 
@@ -12,34 +10,35 @@ defineRule('confirmed', confirmed)
 
 const props = withDefaults(
   defineProps<{
-    label: string
     name: string
     modelValue: string
   }>(),
   {
-    label: 'Contraseña',
-    name: 'password',
-    modelValue: ''
+    name: 'password'
   }
 )
 
-const $emit = defineEmits(['update:modelValue'])
-
-const { input, errorMessage } = useInputField(props.name, 'contraseña', {
-  required: required,
-  min: min(8, 'La contraseña debe tener al menos 8 caracteres')
+const { errorMessage, value } = useField<string>(props.name, {
+  required,
+  min: 4
 })
+
+const $emit = defineEmits(['update:modelValue'])
+const onUpdate = (event: any) => {
+  $emit('update:modelValue', event.target.value)
+}
 </script>
 <template>
-  <div class="flex flex-column gap-2">
-    <label :for="props.name">{{ props.label }}</label>
+  <div class="flex flex-column gap-2 relative mb-6">
+    <label :for="props.name">Contraseña</label>
     <Password
-      v-model="input"
-      :inputId="props.name"
+      :name="props.name"
+      type="password"
+      required
       toggleMask
-      strongLabel="La contraseña es valida"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      v-model="value"
+      @input="onUpdate"
     />
-    <small id="username-help" class="text-red-700">{{ errorMessage }}</small>
+    <small class="text-red-700 absolute top-100">{{ errorMessage }}</small>
   </div>
 </template>

@@ -3,7 +3,12 @@ import { ref, watch } from 'vue'
 import type { Cart } from '@/types/cart'
 import type { Product } from '@/types/product'
 
+import { useAuthStore } from './auth.store'
+import { getUserLoggedCartService, addProductToCartService } from '@/services/cart.service'
+
 export const UseCartStore = defineStore('cart', () => {
+  const store = useAuthStore()
+
   const cart = ref<Cart[]>([])
 
   const updateTotals = () => {
@@ -18,14 +23,20 @@ export const UseCartStore = defineStore('cart', () => {
     return { totalItems, totalPrice, shippingCost, grandTotal }
   }
 
-  const handleAddToCart = (product: Product) => {
+  const handleAddToCart = async (product: Product) => {
     const productExistInCart = cart.value.find((item) => item.id === product.id)
     if (productExistInCart) {
       if (productExistInCart.quantity! < productExistInCart.stock) {
         productExistInCart.quantity!++
       }
     } else {
-      cart.value.push({ ...product, quantity: 1 })
+      const res = await addProductToCartService(store.user?.id, product)
+      cart.value.push({
+        ...res,
+        quantity: 1,
+        disabledSum: false,
+        disabledMinus: false
+      })
     }
   }
 
@@ -42,7 +53,16 @@ export const UseCartStore = defineStore('cart', () => {
   }
 
   const handleDeleteProduct = (id: number) => {
-    return cart.value = cart.value.filter((product) => product.id !== id)
+    return (cart.value = cart.value.filter((product) => product.id !== id))
+  }
+
+  const handleGetUserLoggedCart = async () => {
+    const cart = await getUserLoggedCartService(store.user?.id as number)
+    cart.forEach((product) => {
+      product.disabledSum = product.quantity! >= product.stock
+      product.disabledMinus = product.quantity! <= 1
+    })
+    return cart
   }
 
   const totals = ref(updateTotals())
@@ -65,6 +85,7 @@ export const UseCartStore = defineStore('cart', () => {
     handleAddToCart,
     handleSumQuantity,
     handleMinusQuantity,
-    handleDeleteProduct
+    handleDeleteProduct,
+    handleGetUserLoggedCart
   }
 })

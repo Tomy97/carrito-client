@@ -1,26 +1,30 @@
 <script setup lang="ts">
-import { defineRule } from 'vee-validate'
+import { defineRule, useField } from 'vee-validate'
 import { required } from '@vee-validate/rules'
 
-import FloatLabel from 'primevue/floatlabel'
 import InputText from 'primevue/inputtext'
-import useInputField from '@/composable/useInputField'
 
 defineRule('required', required)
 
 const props = defineProps<{
   label: string
   name: string
+  modelValue: string
 }>()
 
-const { input, errorMessage } = useInputField(props.name, props.label, {
-  required: required
+const { errorMessage, value } = useField<string>(props.name, {
+  required
 })
+
+const $emit = defineEmits(['update:modelValue'])
+const onUpdate = (event: any) => {
+  $emit('update:modelValue', event.target.value)
+}
 </script>
 <template>
-  <FloatLabel>
-    <InputText :id="props.name" v-model="input" />
+  <div class="flex flex-column gap-2 relative">
     <label :for="props.name">{{ props.label }}</label>
-    <small id="username-help">{{ errorMessage }}</small>
-  </FloatLabel>
+    <InputText :name="props.name" type="text" required v-model="value" @input="onUpdate" />
+    <small class="text-red-700 absolute top-100">{{ errorMessage }}</small>
+  </div>
 </template>

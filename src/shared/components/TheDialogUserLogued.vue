@@ -3,7 +3,11 @@ import Dialog from 'primevue/dialog'
 import Button from 'primevue/button'
 
 const props = defineProps<{
-    visible: boolean
+  visible: boolean
+  userData: {
+    name: string
+    balance: number
+  }
 }>()
 
 const $emit = defineEmits(['closeDialog', 'handleLogout'])
@@ -17,18 +21,15 @@ const $emit = defineEmits(['closeDialog', 'handleLogout'])
     :draggable="false"
     @update:visible="$emit('closeDialog')"
   >
-    <span>
-      <i class="pi pi-user" style="font-size: 2rem" />
-      <span class="text-700">Te logueaste correctamente</span>
-    </span>
+    <div class="mb-2">
+      <span class="text-700">Bienvenido {{ userData.name }}</span>
+    </div>
+    <div class="mb-3">
+      <span class="text-700">Balance: ${{ userData.balance }}</span>
+    </div>
 
     <div class="flex">
-      <Button
-        label="Logout"
-        icon="pi pi-times"
-        class="p-button-danger"
-        @click="$emit('handleLogout')"
-      />
+      <Button label="Logout" class="p-button-danger w-full" @click="$emit('handleLogout')" />
     </div>
   </Dialog>
 </template>
