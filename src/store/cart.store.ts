@@ -4,7 +4,11 @@ import type { Cart } from '@/types/cart'
 import type { Product } from '@/types/product'
 
 import { useAuthStore } from './auth.store'
-import { getUserLoggedCartService, addProductToCartService } from '@/services/cart.service'
+import {
+  getUserLoggedCartService,
+  addProductToCartService,
+  removeProductFromCartService
+} from '@/services/cart.service'
 
 export const UseCartStore = defineStore('cart', () => {
   const store = useAuthStore()
@@ -52,8 +56,8 @@ export const UseCartStore = defineStore('cart', () => {
     }
   }
 
-  const handleDeleteProduct = (id: number) => {
-    return (cart.value = cart.value.filter((product) => product.id !== id))
+  const handleDeleteProduct = async (id: number) => {
+    return await removeProductFromCartService(id)
   }
 
   const handleGetUserLoggedCart = async () => {

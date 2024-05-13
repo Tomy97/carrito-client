@@ -43,7 +43,7 @@ const handleChangeDialogVal = () => {
           </RouterLink>
 
           <template v-if="authStore.isUserLogged">
-            <div @click="handleChangeDialogVal" class="flex flex-wrap flex-column text-center">
+            <div @click="handleChangeDialogVal" class="flex flex-wrap flex-column text-center cursor-pointer ml-2">
               <span>
                 {{ authStore.user?.name }}
               </span>

@@ -8,9 +8,7 @@ import { onMounted } from 'vue'
 const store = UseCartStore()
 
 onMounted(async () => {
-  console.log('se monto el componente')
-  
-  await store.handleGetUserLoggedCart()
+  store.cart = await store.handleGetUserLoggedCart()
 })
 
 </script>

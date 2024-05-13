@@ -1,13 +1,13 @@
-import type { Cart } from '@/types/cart'
+import type { CarRespose, Cart } from '@/types/cart'
 import type { Product } from '@/types/product'
 import axios from 'axios'
 
 export const getUserLoggedCartService = async (userId: number): Promise<Cart[]> => {
-  console.log('se ejecuta getUserLoggedCartService')
+  const { data } = await axios.get<CarRespose>(
+    import.meta.env.VITE_API_URL + `/cart?userId=${userId}`
+  )
 
-  const { data } = await axios.get<Cart[]>(import.meta.env.VITE_API_URL + `/cart?userId=${userId}`)
-
-  return data
+  return data.products
 }
 
 export const addProductToCartService = async (
@@ -19,4 +19,8 @@ export const addProductToCartService = async (
   )
 
   return data
+}
+
+export const removeProductFromCartService = async (id: number) => {
+  await axios.delete(import.meta.env.VITE_API_URL + `/cart?productId=${id}`)
 }

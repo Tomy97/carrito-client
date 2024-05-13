@@ -90,7 +90,7 @@ const $emit = defineEmits(['deleteProduct', 'sumQuantity', 'minusQuantity'])
               />
             </div>
             <span class="text-center">
-              <p class="text-sm">Stock: {{ data.stock }}</p>
+              <p class="text-sm m-0 mt-2">Stock: {{ data.stock }}</p>
             </span>
           </template>
         </Column>
