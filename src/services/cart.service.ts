@@ -21,6 +21,6 @@ export const addProductToCartService = async (
   return data
 }
 
-export const removeProductFromCartService = async (id: number) => {
-  await axios.delete(import.meta.env.VITE_API_URL + `/cart?productId=${id}`)
+export const removeProductFromCartService = async (cartProductId: number) => {
+  await axios.delete(import.meta.env.VITE_API_URL + `/cart?cartProductId=${cartProductId}`)
 }

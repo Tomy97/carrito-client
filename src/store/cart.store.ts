@@ -1,47 +1,24 @@
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 import type { Cart } from '@/types/cart'
-import type { Product } from '@/types/product'
-
 import { useAuthStore } from './auth.store'
-import {
-  getUserLoggedCartService,
-  addProductToCartService,
-  removeProductFromCartService
-} from '@/services/cart.service'
+import { getUserLoggedCartService, removeProductFromCartService } from '@/services/cart.service'
 
 export const UseCartStore = defineStore('cart', () => {
   const store = useAuthStore()
-
-  const cart = ref<Cart[]>([])
+  const cartList = ref<Cart[]>([])
+  const authStore = useAuthStore()
 
   const updateTotals = () => {
     const totalItems = parseFloat(
-      cart.value.reduce((acc, item) => acc + item.quantity!, 0).toFixed(2)
+      cartList.value.reduce((acc, item) => acc + item.quantity!, 0).toFixed(2)
     )
     const totalPrice = parseFloat(
-      cart.value.reduce((acc, item) => acc + item.price * item.quantity!, 0).toFixed(2)
+      cartList.value.reduce((acc, item) => acc + item.price * item.quantity!, 0).toFixed(2)
     )
     const shippingCost = totalItems * 5
     const grandTotal = parseFloat((totalPrice + shippingCost).toFixed(2))
     return { totalItems, totalPrice, shippingCost, grandTotal }
-  }
-
-  const handleAddToCart = async (product: Product) => {
-    const productExistInCart = cart.value.find((item) => item.id === product.id)
-    if (productExistInCart) {
-      if (productExistInCart.quantity! < productExistInCart.stock) {
-        productExistInCart.quantity!++
-      }
-    } else {
-      const res = await addProductToCartService(store.user?.id, product)
-      cart.value.push({
-        ...res,
-        quantity: 1,
-        disabledSum: false,
-        disabledMinus: false
-      })
-    }
   }
 
   const handleSumQuantity = (product: Cart) => {
@@ -57,7 +34,10 @@ export const UseCartStore = defineStore('cart', () => {
   }
 
   const handleDeleteProduct = async (id: number) => {
-    return await removeProductFromCartService(id)
+    await removeProductFromCartService(id)
+    cartList.value = await getUserLoggedCartService(store.user?.id as number)
+
+    return cartList.value
   }
 
   const handleGetUserLoggedCart = async () => {
@@ -72,9 +52,9 @@ export const UseCartStore = defineStore('cart', () => {
   const totals = ref(updateTotals())
 
   watch(
-    cart,
+    cartList,
     () => {
-      cart.value.forEach((product) => {
+      cartList.value.forEach((product) => {
         product.disabledSum = product.quantity! >= product.stock
         product.disabledMinus = product.quantity! <= 1
       })
@@ -83,10 +63,20 @@ export const UseCartStore = defineStore('cart', () => {
     { deep: true }
   )
 
+  watch(
+    () => authStore.isUserLogged,
+    () => {
+      if (authStore.isUserLogged) {
+        handleGetUserLoggedCart()
+      } else {
+        cartList.value = []
+      }
+    }
+  )
+
   return {
-    cart,
+    cartList,
     totals,
-    handleAddToCart,
     handleSumQuantity,
     handleMinusQuantity,
     handleDeleteProduct,

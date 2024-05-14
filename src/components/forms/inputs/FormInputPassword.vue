@@ -38,6 +38,7 @@ const onUpdate = (event: any) => {
       toggleMask
       v-model="value"
       @input="onUpdate"
+      class="w-full"
     />
     <small class="text-red-700 absolute top-100">{{ errorMessage }}</small>
   </div>

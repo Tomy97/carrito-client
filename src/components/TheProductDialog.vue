@@ -15,7 +15,11 @@ const handleRedirectToCart = () => {
 <template>
   <Dialog v-model:visible="store.openModal" modal header="Producto Agregado">
     <div class="flex justify-content-center">
-      <img :src="store.productSelected?.imageFilename" :alt="store.productSelected?.name" class="img" />
+      <img
+        :src="store.productSelected?.imageFilename"
+        :alt="store.productSelected?.name"
+        class="img"
+      />
       <div class="divider" />
       <div class="description pl-3">
         <h3 class="font-weight-bold text-center">Producto Agregado al Carrito</h3>

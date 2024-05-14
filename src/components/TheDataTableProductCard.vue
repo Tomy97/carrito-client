@@ -114,7 +114,7 @@ const $emit = defineEmits(['deleteProduct', 'sumQuantity', 'minusQuantity'])
                 outlined
                 rounded
                 severity="danger"
-                @click="$emit('deleteProduct', data.id)"
+                @click="$emit('deleteProduct', data.cartProductId)"
               />
             </div>
           </template>

@@ -2,6 +2,9 @@ import type { Product } from '@/types/product'
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 import { getProductsService } from '@/services/products.service'
+import { addProductToCartService } from '@/services/cart.service'
+import { useAuthStore } from './auth.store'
+import { UseCartStore } from './cart.store'
 
 export const useProductStore = defineStore('product', () => {
   const products = ref<Product[]>([])
@@ -10,15 +13,18 @@ export const useProductStore = defineStore('product', () => {
   const hasPermission = ref<boolean>(false)
   const openModal = ref<boolean>(false)
 
+  const store = useAuthStore()
+  const cartStore = UseCartStore()
+
   const getProducts = async () => {
     products.value = await getProductsService()
   }
 
-  const addToCart = (product: Product) => {
-    // Agregar al dialog de confirmacion y la informacion del producto que agrego
+  const addToCart = async (product: Product) => {
     openModal.value = true
     productSelected.value = product
-    cartList.value.push(product)
+    const res = await addProductToCartService(store.user?.id, product)
+    cartStore.cartList.push(res)
   }
 
   const deletePublishProduct = (id: number) => {

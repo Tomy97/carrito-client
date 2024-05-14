@@ -6,5 +6,6 @@ export type CarRespose = {
 }
 
 export interface Cart extends Product {
+  cartProductId?: number,
   quantity?: number
 }

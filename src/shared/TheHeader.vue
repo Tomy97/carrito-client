@@ -13,7 +13,7 @@ const store = UseCartStore()
 const authStore = useAuthStore()
 
 const router = useRouter()
-const incrementBadge = computed(() => store.cart?.length ?? 0)
+const incrementBadge = computed(() => store.cartList?.length ?? 0)
 
 const onHandleRedirectToLogin = () => {
   router.push({ name: 'Login' })
